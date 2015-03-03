@@ -2,8 +2,6 @@ package io.github.vyo.hello_jersey.application;
 
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.servlet.ServletContainer;
 
 import javax.servlet.ServletException;
 import java.io.File;
@@ -33,24 +31,19 @@ public class Launcher {
         // Bind the port to Tomcat server
         tomcat.setPort(Integer.valueOf(webPort));
 
+        tomcat.enableNaming();
 
-        tomcat.addWebapp("", new File(webappDirLocation).getAbsolutePath());
-//        // Define a web application context.
-//        Context context = tomcat.addWebapp("/embedded", new File(
-//                webappDirLocation).getAbsolutePath());
-//
-//        // Add servlet that will register Jersey REST resources
-//        Tomcat.addServlet(context, "jersey-container-servlet", resourceConfig());
-//        context.addServletMapping("/rest/*", "jersey-container-servlet");
+//        StandardContext ctx = (StandardContext)
+        tomcat.addWebapp("/", new File(webappDirLocation).getAbsolutePath());
+        //declare an alternate location for your "WEB-INF/classes" dir:
+//        File additionWebInfClasses = new File("target/classes");
+//        WebResourceRoot resources = new StandardRoot(ctx);
+//        resources.addPreResources(new DirResourceSet(resources, "/WEB-INF/classes", additionWebInfClasses
+//                .getAbsolutePath(), "/"));
+//        ctx.setResources(resources);
 
         tomcat.start();
         tomcat.getServer().await();
     }
-
-    private ServletContainer resourceConfig() {
-        return new ServletContainer(new ResourceConfig(
-                new Application().getClasses()));
-    }
-
 
 }
