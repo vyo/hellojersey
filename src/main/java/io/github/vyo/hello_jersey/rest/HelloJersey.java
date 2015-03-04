@@ -17,10 +17,10 @@ import javax.ws.rs.core.MediaType;
 @Path("rest/hellojersey")
 public class HelloJersey {
 
-    GreetingStore greetings;
+    GreetingStore greetingStore;
 
     public HelloJersey() {
-        greetings = GreetingStore.getInstance();
+        setGreetingStore(GreetingStore.getInstance());
     }
 
     @GET
@@ -30,7 +30,7 @@ public class HelloJersey {
             Greeting.class)
     @ApiResponses({@ApiResponse(code = 200, message = "Jersey is alive and well!")})
     public Greeting getGreeting() {
-        return greetings.defaultGreeting();
+        return greetingStore.defaultGreeting();
     }
 
     @GET
@@ -51,7 +51,7 @@ public class HelloJersey {
     @ApiResponses({@ApiResponse(code = 200, message = "Stored Greeting retrieved."), @ApiResponse(code = 404, message
             = "No Greeting found for requested alias.")})
     public Greeting retrieveGreeting(@PathParam("alias") String alias) {
-        return greetings.findGreeting(alias);
+        return greetingStore.findGreeting(alias);
     }
 
     @POST
@@ -61,6 +61,10 @@ public class HelloJersey {
             "path parameter, and a Greeting object to be posted")
     @ApiResponses({@ApiResponse(code = 204, message = "Message stored")})
     public void storeGreeting(@PathParam("alias") String alias, Greeting greeting) {
-        greetings.storeGreeting(alias, greeting);
+        greetingStore.storeGreeting(alias, greeting);
+    }
+
+    public void setGreetingStore(GreetingStore greetingStore) {
+        this.greetingStore = greetingStore;
     }
 }

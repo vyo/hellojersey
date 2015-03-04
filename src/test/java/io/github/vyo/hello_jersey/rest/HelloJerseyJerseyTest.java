@@ -1,9 +1,13 @@
 package io.github.vyo.hello_jersey.rest;
 
 import io.github.vyo.hello_jersey.entity.Greeting;
+import io.github.vyo.hello_jersey.repository.GreetingStore;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import javax.ws.rs.core.Application;
 
@@ -13,6 +17,17 @@ public class HelloJerseyJerseyTest extends JerseyTest {
 
     @Override
     protected Application configure() {
+        GreetingStore greetingStore = Mockito.mock(GreetingStore.class);
+        Mockito.when(greetingStore.findGreeting(Mockito.anyString())).thenAnswer(new Answer<Greeting>() {
+            @Override
+            public Greeting answer(InvocationOnMock invocation)
+                    throws Throwable {
+                String name = (String) invocation.getArguments()[0];
+                return new Greeting("Hello, I am a mock response. (" + name + ")");
+            }
+
+        });
+
         ResourceConfig resourceConfig = new ResourceConfig(HelloJersey.class);
         return resourceConfig;
     }
@@ -30,7 +45,7 @@ public class HelloJerseyJerseyTest extends JerseyTest {
     }
 
     @Test
-         public void testHelloEchoObject() {
+    public void testHelloEchoObject() {
 
         String echoString = "I am an echo!";
         String echoResult = new StringBuilder(echoString).reverse().toString();
