@@ -1,4 +1,4 @@
-package io.github.vyo.hello_jersey.rest;
+package io.github.vyo.hellojersey.rest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

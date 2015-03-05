@@ -1,4 +1,4 @@
-package io.github.vyo.hello_jersey.repository;
+package io.github.vyo.hellojersey.repository;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;

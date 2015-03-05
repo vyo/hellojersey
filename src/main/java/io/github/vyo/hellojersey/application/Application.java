@@ -1,4 +1,4 @@
-package io.github.vyo.hello_jersey.application;
+package io.github.vyo.hellojersey.application;
 
 import com.wordnik.swagger.config.ConfigFactory;
 import com.wordnik.swagger.config.ScannerFactory;
@@ -18,7 +18,7 @@ import javax.ws.rs.ApplicationPath;
 public class Application extends ResourceConfig {
 
     public Application() {
-        packages(true, "io.github.vyo.hello_jersey");
+        packages(true, "io.github.vyo.hellojersey");
         packages(true, "com.wordnik.swagger.jersey.listing");
 
         SwaggerConfig beanConfig = new SwaggerConfig();

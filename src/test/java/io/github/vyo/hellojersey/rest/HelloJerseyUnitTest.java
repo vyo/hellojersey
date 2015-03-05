@@ -1,7 +1,7 @@
-package io.github.vyo.hello_jersey.rest;
+package io.github.vyo.hellojersey.rest;
 
-import io.github.vyo.hello_jersey.entity.Greeting;
-import io.github.vyo.hello_jersey.repository.GreetingDatabase;
+import io.github.vyo.hellojersey.entity.Greeting;
+import io.github.vyo.hellojersey.repository.GreetingDatabase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

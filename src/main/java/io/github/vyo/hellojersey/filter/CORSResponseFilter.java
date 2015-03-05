@@ -1,4 +1,4 @@
-package io.github.vyo.hello_jersey.filter;
+package io.github.vyo.hellojersey.filter;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;

@@ -1,4 +1,4 @@
-package io.github.vyo.hello_jersey.entity;
+package io.github.vyo.hellojersey.entity;
 
 import com.wordnik.swagger.annotations.ApiModel;
 import com.wordnik.swagger.annotations.ApiModelProperty;

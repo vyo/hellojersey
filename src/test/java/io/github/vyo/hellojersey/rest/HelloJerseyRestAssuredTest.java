@@ -1,4 +1,4 @@
-package io.github.vyo.hello_jersey.rest;
+package io.github.vyo.hellojersey.rest;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;

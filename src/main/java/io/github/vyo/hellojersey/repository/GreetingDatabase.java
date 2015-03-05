@@ -1,7 +1,7 @@
-package io.github.vyo.hello_jersey.repository;
+package io.github.vyo.hellojersey.repository;
 
-import io.github.vyo.hello_jersey.entity.EMF;
-import io.github.vyo.hello_jersey.entity.Greeting;
+import io.github.vyo.hellojersey.entity.EMF;
+import io.github.vyo.hellojersey.entity.Greeting;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;

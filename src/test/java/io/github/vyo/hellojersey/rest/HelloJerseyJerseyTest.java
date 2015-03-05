@@ -1,9 +1,9 @@
-package io.github.vyo.hello_jersey.rest;
+package io.github.vyo.hellojersey.rest;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
-import io.github.vyo.hello_jersey.entity.Greeting;
-import io.github.vyo.hello_jersey.repository.GreetingDatabase;
+import io.github.vyo.hellojersey.entity.Greeting;
+import io.github.vyo.hellojersey.repository.GreetingDatabase;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;

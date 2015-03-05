@@ -1,4 +1,4 @@
-package io.github.vyo.hello_jersey.application;
+package io.github.vyo.hellojersey.application;
 
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.WebResourceRoot;
@@ -36,9 +36,6 @@ public class Launcher {
         tomcat.setPort(Integer.valueOf(webPort));
 
         tomcat.enableNaming();
-
-//        tomcat.addWebapp("/", new File(webappDirLocation).getAbsolutePath());
-
 
         StandardContext ctx = (StandardContext) tomcat.addWebapp("/",
                 new File(webappDirLocation).getAbsolutePath());

@@ -1,12 +1,12 @@
-package io.github.vyo.hello_jersey.rest;
+package io.github.vyo.hellojersey.rest;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
-import io.github.vyo.hello_jersey.entity.EMF;
-import io.github.vyo.hello_jersey.entity.Greeting;
-import io.github.vyo.hello_jersey.repository.GreetingDatabase;
+import io.github.vyo.hellojersey.entity.EMF;
+import io.github.vyo.hellojersey.entity.Greeting;
+import io.github.vyo.hellojersey.repository.GreetingDatabase;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Singleton;

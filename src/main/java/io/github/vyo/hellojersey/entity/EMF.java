@@ -1,4 +1,4 @@
-package io.github.vyo.hello_jersey.entity;
+package io.github.vyo.hellojersey.entity;
 
 import org.hibernate.ejb.Ejb3Configuration;
 
