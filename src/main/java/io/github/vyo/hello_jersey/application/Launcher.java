@@ -33,14 +33,7 @@ public class Launcher {
 
         tomcat.enableNaming();
 
-//        StandardContext ctx = (StandardContext)
         tomcat.addWebapp("/", new File(webappDirLocation).getAbsolutePath());
-        //declare an alternate location for your "WEB-INF/classes" dir:
-//        File additionWebInfClasses = new File("target/classes");
-//        WebResourceRoot resources = new StandardRoot(ctx);
-//        resources.addPreResources(new DirResourceSet(resources, "/WEB-INF/classes", additionWebInfClasses
-//                .getAbsolutePath(), "/"));
-//        ctx.setResources(resources);
 
         tomcat.start();
         tomcat.getServer().await();

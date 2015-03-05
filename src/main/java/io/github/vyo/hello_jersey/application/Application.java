@@ -6,8 +6,6 @@ import com.wordnik.swagger.config.SwaggerConfig;
 import com.wordnik.swagger.jaxrs.config.DefaultJaxrsScanner;
 import com.wordnik.swagger.jaxrs.reader.DefaultJaxrsApiReader;
 import com.wordnik.swagger.reader.ClassReaders;
-import io.github.vyo.hello_jersey.filter.CORSResponseFilter;
-import io.github.vyo.hello_jersey.repository.GreetingStore;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;

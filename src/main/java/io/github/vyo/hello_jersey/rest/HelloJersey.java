@@ -7,20 +7,30 @@ import com.wordnik.swagger.annotations.ApiResponses;
 import io.github.vyo.hello_jersey.entity.Greeting;
 import io.github.vyo.hello_jersey.repository.GreetingStore;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Singleton;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 /**
  * Created by Manuel Weidmann on 01.03.2015.
  */
+@Singleton
 @Api(value = "hellojersey", description = "'Hello World'-style endpoint")
 @Path("rest/hellojersey")
 public class HelloJersey {
 
+    @Context
     GreetingStore greetingStore;
 
     public HelloJersey() {
-        setGreetingStore(GreetingStore.getInstance());
+    }
+
+    @PostConstruct
+    private void info() {
+        //reminder: @Context injected resource are availabe AFTER construction, not during
+        //reference here if needed
     }
 
     @GET
