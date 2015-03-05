@@ -41,12 +41,38 @@
     </build>
 
     <dependencies>
-        <!-- Needed on Jetty/Tomcat -->
+        <!-- START OF LOGGING DEPENDENCIES-->
+        <!-- since everyone and his mother pulls in some sort of logging make sure we get there first -->
         <dependency>
-            <groupId>org.glassfish.jersey.bundles</groupId>
-            <artifactId>jaxrs-ri</artifactId>
-            <version>2.13</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.7</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <!-- END OF LOGGING DEPENDENCIES-->
+        <!-- START OF JERSEY DEPENDENCIES-->
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>2.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-moxy</artifactId>
+            <version>2.12</version>
+        </dependency>
+        <!-- END OF JERSEY DEPENDENCIES-->
+        <!-- servlet 3.0 for all that injection and web goodness -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <!-- START OF EMBEDDED TOMCAT DEPENDENCIES-->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
@@ -62,63 +88,55 @@
             <artifactId>tomcat-jasper</artifactId>
             <version>8.0.15</version>
         </dependency>
+        <!-- END OF EMBEDDED TOMCAT DEPENDENCIES-->
+        <!-- dynamic rest api generation and provision -->
         <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet</artifactId>
-            <version>2.13</version>
+            <groupId>com.wordnik</groupId>
+            <artifactId>swagger-jersey2-jaxrs_2.10</artifactId>
+            <version>1.3.12</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.glassfish.jersey.media</groupId>
+                    <artifactId>jersey-media-multipart</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-moxy</artifactId>
-            <version>2.12</version>
-        </dependency>
+        <!-- handling json mapping -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.3</version>
         </dependency>
+        <!-- START OF TEST SCOPE DEPENDENCIES -->
+        <!-- mocking frame work -->
         <dependency>
-            <groupId>com.jayway.restassured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>2.4.0</version>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.8</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.test-framework.providers</groupId>
-            <artifactId>jersey-test-framework-provider-inmemory</artifactId>
-            <version>2.13</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-json</artifactId>
-            <version>1.18.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.5</version>
-        </dependency>
+        <!-- standard junit tests -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
+        <!-- client side api for rest testing -->
         <dependency>
-            <groupId>com.wordnik</groupId>
-            <artifactId>swagger-jersey2-jaxrs_2.10</artifactId>
-            <version>1.3.12</version>
+            <groupId>com.jayway.restassured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>2.4.0</version>
+            <scope>test</scope>
         </dependency>
+        <!-- jersey's own faux-unit test framework -->
+        <dependency>
+            <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+            <artifactId>jersey-test-framework-provider-inmemory</artifactId>
+            <version>2.13</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- END OF TEST SCOPE DEPENDENCIES -->
     </dependencies>
 
 </project>
