@@ -20,17 +20,13 @@ import javax.ws.rs.ApplicationPath;
 public class Application extends ResourceConfig {
 
     public Application() {
-        register(CORSResponseFilter.class);
-        register(GreetingStore.class);
-        register(Binder.class);
-
         packages(true, "io.github.vyo.hello_jersey");
         packages(true, "com.wordnik.swagger.jersey.listing");
 
         SwaggerConfig beanConfig = new SwaggerConfig();
         ConfigFactory.setConfig(beanConfig);
         beanConfig.setApiVersion("1.0.0");
-        beanConfig.setBasePath("http://localhost:8080/app");
+        beanConfig.setBasePath("/app");
         ScannerFactory.setScanner(new DefaultJaxrsScanner());
         ClassReaders.setReader(new DefaultJaxrsApiReader());
     }
