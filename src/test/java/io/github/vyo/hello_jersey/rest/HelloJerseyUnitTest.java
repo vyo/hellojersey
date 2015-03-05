@@ -1,11 +1,14 @@
 package io.github.vyo.hello_jersey.rest;
 
 import io.github.vyo.hello_jersey.entity.Greeting;
-import io.github.vyo.hello_jersey.repository.GreetingStore;
+import io.github.vyo.hello_jersey.repository.GreetingDatabase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,13 +17,18 @@ import static org.junit.Assert.assertEquals;
  */
 public class HelloJerseyUnitTest {
 
+    @Mock
+    GreetingDatabase greetingDatabase;
+
+    @InjectMocks
     HelloJersey helloJersey;
 
     @Before
     public void setUp() {
         helloJersey = new HelloJersey();
-        GreetingStore greetingStore = Mockito.mock(GreetingStore.class);
-        Mockito.when(greetingStore.findGreeting(Mockito.anyString())).thenAnswer(invocation -> {
+        MockitoAnnotations.initMocks(this);
+
+        Mockito.when(greetingDatabase.findGreeting(Mockito.anyString())).thenAnswer(invocation -> {
             String name = (String) invocation.getArguments()[0];
 
             if (name.equals("hawaii")) {
@@ -29,8 +37,8 @@ public class HelloJerseyUnitTest {
                 return new Greeting("Hello, I am a mock response.");
             }
         });
-        Mockito.when(greetingStore.defaultGreeting()).thenAnswer(invocation -> new Greeting("Hello mock Jersey."));
-        helloJersey.setGreetingStore(greetingStore);
+        Mockito.when(greetingDatabase.defaultGreeting()).thenAnswer(invocation -> new Greeting("Hello mock Jersey."));
+
     }
 
     @After

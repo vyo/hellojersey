@@ -6,7 +6,7 @@
 
     <groupId>io.github.vyo</groupId>
     <artifactId>hello_jersey</artifactId>
-    <version>1.0</version>
+    <version>2.0</version>
     <packaging>war</packaging>
 
     <build>
@@ -137,6 +137,41 @@
             <scope>test</scope>
         </dependency>
         <!-- END OF TEST SCOPE DEPENDENCIES -->
+        <!-- START OF DATABASE DEPENDENCIES -->
+        <!-- get all the hibernate thingies... -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.0.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.2.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.common</groupId>
+            <artifactId>hibernate-commons-annotations</artifactId>
+            <version>4.0.1.Final</version>
+            <classifier>tests</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>1.0.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.0.1.Final</version>
+        </dependency>
+        <!-- H2 embedded database -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.182</version>
+        </dependency>
+        <!-- END OF DATABASE DEPENDENCIES -->
     </dependencies>
 
 </project>

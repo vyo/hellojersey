@@ -4,8 +4,9 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
+import io.github.vyo.hello_jersey.entity.EMF;
 import io.github.vyo.hello_jersey.entity.Greeting;
-import io.github.vyo.hello_jersey.repository.GreetingStore;
+import io.github.vyo.hello_jersey.repository.GreetingDatabase;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
@@ -22,14 +23,17 @@ import javax.ws.rs.core.MediaType;
 public class HelloJersey {
 
     @Context
-    GreetingStore greetingStore;
+    EMF emf;
+
+    @Context
+    GreetingDatabase greetingDatabase;
 
     public HelloJersey() {
     }
 
     @PostConstruct
     private void info() {
-        //reminder: @Context injected resource are availabe AFTER construction, not during
+        //reminder: @Context injected resources are available AFTER construction, not during it
         //reference here if needed
     }
 
@@ -40,7 +44,7 @@ public class HelloJersey {
             Greeting.class)
     @ApiResponses({@ApiResponse(code = 200, message = "Jersey is alive and well!")})
     public Greeting getGreeting() {
-        return greetingStore.defaultGreeting();
+        return greetingDatabase.defaultGreeting();
     }
 
     @GET
@@ -61,7 +65,7 @@ public class HelloJersey {
     @ApiResponses({@ApiResponse(code = 200, message = "Stored Greeting retrieved."), @ApiResponse(code = 404, message
             = "No Greeting found for requested alias.")})
     public Greeting retrieveGreeting(@PathParam("alias") String alias) {
-        return greetingStore.findGreeting(alias);
+        return greetingDatabase.findGreeting(alias);
     }
 
     @POST
@@ -71,10 +75,7 @@ public class HelloJersey {
             "path parameter, and a Greeting object to be posted")
     @ApiResponses({@ApiResponse(code = 204, message = "Message stored")})
     public void storeGreeting(@PathParam("alias") String alias, Greeting greeting) {
-        greetingStore.storeGreeting(alias, greeting);
+        greetingDatabase.storeGreeting(alias, greeting);
     }
 
-    public void setGreetingStore(GreetingStore greetingStore) {
-        this.greetingStore = greetingStore;
-    }
 }

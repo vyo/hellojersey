@@ -1,7 +1,11 @@
 package io.github.vyo.hello_jersey.application;
 
 import org.apache.catalina.LifecycleException;
+import org.apache.catalina.WebResourceRoot;
+import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.startup.Tomcat;
+import org.apache.catalina.webresources.DirResourceSet;
+import org.apache.catalina.webresources.StandardRoot;
 
 import javax.servlet.ServletException;
 import java.io.File;
@@ -12,7 +16,7 @@ import java.net.MalformedURLException;
  */
 public class Launcher {
 
-    public static void main(String[] args) throws Exception, LifecycleException {
+    public static void main(String[] args) throws Exception {
         new Launcher().start();
     }
 
@@ -33,7 +37,18 @@ public class Launcher {
 
         tomcat.enableNaming();
 
-        tomcat.addWebapp("/", new File(webappDirLocation).getAbsolutePath());
+//        tomcat.addWebapp("/", new File(webappDirLocation).getAbsolutePath());
+
+
+        StandardContext ctx = (StandardContext) tomcat.addWebapp("/",
+                new File(webappDirLocation).getAbsolutePath());
+
+        //declare an alternate location for your "WEB-INF/classes" dir:
+        File additionWebInfClasses = new File("target/classes");
+        WebResourceRoot resources = new StandardRoot(ctx);
+        resources.addPreResources(new DirResourceSet(resources, "/WEB-INF/classes", additionWebInfClasses
+                .getAbsolutePath(), "/"));
+        ctx.setResources(resources);
 
         tomcat.start();
         tomcat.getServer().await();

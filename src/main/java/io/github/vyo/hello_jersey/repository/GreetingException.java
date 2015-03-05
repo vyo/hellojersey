@@ -7,9 +7,9 @@ import javax.ws.rs.core.Response;
 /**
  * Created by Manuel Weidmann on 03.03.2015.
  */
-public class GreetingStoreException extends WebApplicationException {
+public class GreetingException extends WebApplicationException {
 
-    public GreetingStoreException(String alias) {
+    public GreetingException(String alias) {
         super(Response.status(Response.Status.NOT_FOUND)
                 .entity("Greeting " + alias + " could not be found.").type(MediaType.TEXT_PLAIN).build());
     }
