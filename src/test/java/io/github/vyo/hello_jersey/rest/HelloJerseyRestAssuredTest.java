@@ -10,9 +10,6 @@ import org.junit.Test;
 
 import static com.jayway.restassured.RestAssured.expect;
 import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.config.ConnectionConfig.connectionConfig;
-import static com.jayway.restassured.config.HttpClientConfig.httpClientConfig;
-import static com.jayway.restassured.config.RestAssuredConfig.newConfig;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assume.assumeTrue;
 
@@ -28,16 +25,13 @@ public class HelloJerseyRestAssuredTest {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = 8080;
         RestAssured.basePath = "/app";
-        RestAssured.config = newConfig().connectionConfig(connectionConfig()
-                .closeIdleConnectionsAfterEachResponse()).httpClient
-                (httpClientConfig().setParam("CONNECTION_MANAGER_TIMEOUT", 50));
 
         try {
             Response response = expect().statusCode(200).contentType(ContentType.JSON).when()
                     .get("/rest/hellojersey/hello");
 
-            connectionExists = "Hello Jersey!".equals(new JsonPath(response.getBody().asString()).getString
-                    ("message"));
+            String responseString = new JsonPath(response.getBody().asString()).getString("message");
+            connectionExists = "Hello Jersey!".equals(responseString);
         } catch (Exception e) {
         }
     }
@@ -58,6 +52,9 @@ public class HelloJerseyRestAssuredTest {
     @Test
     public void testHelloEcho() {
         assumeTrue(connectionExists);
-        given().pathParam("echo", "echo.").expect().statusCode(200).when().get("/rest/hellojersey/echo/{echo}");
+        Response response = given().pathParam("echo", "echo").expect().statusCode(200).when().get
+                ("/rest/hellojersey/echo/{echo}");
+
+        assertEquals("ohce", new JsonPath(response.getBody().asString()).getString("message"));
     }
 }
