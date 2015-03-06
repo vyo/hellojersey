@@ -1,7 +1,7 @@
 package io.github.vyo.hellojersey.rest;
 
 import io.github.vyo.hellojersey.entity.Greeting;
-import io.github.vyo.hellojersey.repository.GreetingDatabase;
+import io.github.vyo.hellojersey.repository.GreetingRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 public class HelloJerseyUnitTest {
 
     @Mock
-    GreetingDatabase greetingDatabase;
+    GreetingRepository greetingRepository;
 
     @InjectMocks
     HelloJersey helloJersey;
@@ -28,7 +28,7 @@ public class HelloJerseyUnitTest {
         helloJersey = new HelloJersey();
         MockitoAnnotations.initMocks(this);
 
-        Mockito.when(greetingDatabase.findGreeting(Mockito.anyString())).thenAnswer(invocation -> {
+        Mockito.when(greetingRepository.findGreeting(Mockito.anyString())).thenAnswer(invocation -> {
             String name = (String) invocation.getArguments()[0];
 
             if (name.equals("hawaii")) {
@@ -37,7 +37,7 @@ public class HelloJerseyUnitTest {
                 return new Greeting("Hello, I am a mock response.");
             }
         });
-        Mockito.when(greetingDatabase.defaultGreeting()).thenAnswer(invocation -> new Greeting("Hello mock Jersey."));
+        Mockito.when(greetingRepository.defaultGreeting()).thenAnswer(invocation -> new Greeting("Hello mock Jersey."));
 
     }
 

@@ -3,7 +3,7 @@ package io.github.vyo.hellojersey.rest;
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 import io.github.vyo.hellojersey.entity.Greeting;
-import io.github.vyo.hellojersey.repository.GreetingDatabase;
+import io.github.vyo.hellojersey.repository.GreetingRepository;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 public class HelloJerseyJerseyTest extends JerseyTest {
 
     @Mock
-    GreetingDatabase greetingDatabase;
+    GreetingRepository greetingRepository;
 
 
     @Override
@@ -29,7 +29,7 @@ public class HelloJerseyJerseyTest extends JerseyTest {
         ResourceConfig resourceConfig = new ResourceConfig(HelloJersey.class);
         MockitoAnnotations.initMocks(this);
 
-        Mockito.when(greetingDatabase.findGreeting(Mockito.anyString())).thenAnswer(invocation -> {
+        Mockito.when(greetingRepository.findGreeting(Mockito.anyString())).thenAnswer(invocation -> {
             String name = (String) invocation.getArguments()[0];
 
             if (name.equals("hawaii")) {
@@ -38,14 +38,14 @@ public class HelloJerseyJerseyTest extends JerseyTest {
                 return new Greeting("Hello, I am a mock response.");
             }
         });
-        Mockito.when(greetingDatabase.defaultGreeting()).thenAnswer(invocation -> new Greeting("Hello mock Jersey!"));
-        Mockito.doNothing().when(greetingDatabase).storeGreeting(Mockito.anyString(), Mockito.any(Greeting.class));
+        Mockito.when(greetingRepository.defaultGreeting()).thenAnswer(invocation -> new Greeting("Hello mock Jersey!"));
+        Mockito.doNothing().when(greetingRepository).storeGreeting(Mockito.anyString(), Mockito.any(Greeting.class));
 
         // context injection will not work, thus specify injection behaviour explicitly
         resourceConfig.register(new AbstractBinder() {
             @Override
             protected void configure() {
-                bind(greetingDatabase).to(GreetingDatabase.class);
+                bind(greetingRepository).to(GreetingRepository.class);
             }
         });
         return resourceConfig;

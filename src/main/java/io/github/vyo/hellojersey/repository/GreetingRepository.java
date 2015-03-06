@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Manuel Weidmann on 05.03.2015.
  */
 @Path("greeting-database")
-public class GreetingDatabase {
+public class GreetingRepository {
 
     @Context
     EMF emf;
@@ -39,7 +39,7 @@ public class GreetingDatabase {
         }
     }
 
-    public Greeting findGreeting(String alias) throws GreetingException {
+    public Greeting findGreeting(String alias) throws GreetingRepositoryException {
 
         Session session = null;
         try {
@@ -53,7 +53,7 @@ public class GreetingDatabase {
             return greeting;
 
         } catch (Exception e) {
-            throw new GreetingException(alias);
+            throw new GreetingRepositoryException(alias);
         } finally {
             session.close();
         }
@@ -77,7 +77,7 @@ public class GreetingDatabase {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            throw new GreetingException("");
+            throw new GreetingRepositoryException("");
         } finally {
             session.close();
         }
