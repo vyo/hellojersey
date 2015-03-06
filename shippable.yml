@@ -1,10 +1,19 @@
 language: java
 
+branches:
+  only:
+    - master
+    - develop
+
 jdk:
    - openjdk8
    - oraclejdk8
 
-after_success:
+matrix:
+  allow_failures:
+    - openjdk8
+
+script:
    - mvn test
 
 notifications:
