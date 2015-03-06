@@ -4,23 +4,34 @@ A sample REST app built with Jersey to try out and assess the Jersey Test Framew
 
 
 ###Technology
-We are using
 
-We use                 | for                          | found here
+We use                 | as our                       | from here
 -----------------------|------------------------------|---------------------------
 Jersey                 |  REST framework              | https://jersey.java.net/
 Tomcat (embedded)      |  Application server          | http://tomcat.apache.org/download-80.cgi
 H2                     |  Database                    | http://www.h2database.com/
 Hibernate              |  Database abstraction        | http://hibernate.org/
-Swagger                |  API generation/gresentation | http://swagger.io/
-Mockito                |  Mocking                     | http://mockito.org/
-GSON                   |  All things JSON             | https://code.google.com/p/google-gson/
+Swagger                |  API generation/presentation | http://swagger.io/
+Mockito                |  Mocking framework           | http://mockito.org/
+GSON                   |  JSON library                | https://code.google.com/p/google-gson/
 JUnit                  |  Java test framework         | http://junit.org/
-RESTassured            |  Client REST testing         | https://code.google.com/p/rest-assured/
-Jersey Test Framework  | Faux-unit testing for REST   | https://jersey.java.net/documentation/latest/test-framework.html
+RESTassured            |  REST testing (client API)   | https://code.google.com/p/rest-assured/
+Jersey Test Framework  |  REST testing (unit tests)   | https://jersey.java.net/documentation/latest/test-framework.html
 
 ###Requirements
 You will need
 - java 8 for compiling and running the project
 - maven 3 for building the project
 - a modern web browser for using the web API
+
+###Usage
+Either 'mvn package' the project and deploy it in an applicable container, e.g. Tomcat 7 and up, Jetty or Glassfish;
+or run the project's main class (io.github.vyo.hellojersey.application.Launcher) in your IDE of choice.
+In the latter case an embedded Tomcat 8 will be started and the application deployed therein.
+
+The application exposes a web interface at localhost:8080 (or localhost:PORT, if the PORT environment variable has been specified).
+
+You can then easily inspect and operate the application's REST methods via the Swagger UI.
+
+###Presentation Slides
+http://slides.com/manuelweidmann/jerseytesting
