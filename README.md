@@ -1,4 +1,4 @@
-# hellojersey
+# hellojersey [![Build Status](https://api.shippable.com/projects/54f9d4f35ab6cc135294191b/badge?branchName=master)](https://app.shippable.com/projects/54f9d4f35ab6cc135294191b/builds/latest)
 
 A sample REST app built with Jersey to try out and assess the Jersey Test Framework
 
