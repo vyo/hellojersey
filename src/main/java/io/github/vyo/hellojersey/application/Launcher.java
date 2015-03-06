@@ -6,10 +6,12 @@ import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.webresources.DirResourceSet;
 import org.apache.catalina.webresources.StandardRoot;
+import org.h2.tools.DeleteDbFiles;
 
 import javax.servlet.ServletException;
 import java.io.File;
 import java.net.MalformedURLException;
+import java.sql.*;
 
 /**
  * Created by Manuel Weidmann on 01.03.2015.
@@ -21,8 +23,36 @@ public class Launcher {
     }
 
     public void start() throws ServletException, LifecycleException,
-            MalformedURLException {
+            MalformedURLException, ClassNotFoundException, SQLException {
 
+        /*
+        H2 INITIALISATION START
+         */
+        //set up H2 database
+        // delete the database named 'test' in the user home directory
+        DeleteDbFiles.execute("~/hellojersey-db", "hellojersey", false);
+
+        Class.forName("org.h2.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:h2:~/hellojersey-db/hellojersey;" +
+                "AUTO_SERVER=TRUE", "sa", "");
+        Statement stat = conn.createStatement();
+
+        // this line would initialize the database
+        // from the SQL script file 'init.sql'
+        // stat.execute("runscript from 'init.sql'");
+
+        stat.execute("CREATE TABLE PUBLIC.GREETING(ID INT AUTO_INCREMENT PRIMARY KEY NOT NULL, ALIAS VARCHAR(255)," +
+                "MESSAGE VARCHAR(255) NOT NULL);ALTER TABLE PUBLIC.GREETING ADD CONSTRAINT unique_ID UNIQUE (ID);");
+        stat.execute("insert into GREETING values(1, 'default', 'Hello Jersey!')");
+        stat.close();
+        conn.close();
+         /*
+        H2 INITIALISATION END
+         */
+
+        /*
+        TOMCAT INITIALISATION START
+         */
         // Define a folder to hold web application contents.
         String webappDirLocation = "src/main/webapp/";
         Tomcat tomcat = new Tomcat();
@@ -49,6 +79,9 @@ public class Launcher {
 
         tomcat.start();
         tomcat.getServer().await();
+        /*
+        TOMCAT INITIALISATION END
+         */
     }
 
 }
