@@ -11,16 +11,17 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "GREETING")
-@ApiModel(value = "A simple greeting; nothing out of the ordinary.")
+@ApiModel(description = "A simple greeting; nothing out of the ordinary.")
 public class Greeting {
 
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
+    @ApiModelProperty(hidden = true)
     private int id;
 
     @Column(name = "ALIAS")
-    @ApiModelProperty(value = "An alias for this greeting.", required = true)
+    @ApiModelProperty(value = "An alias for this greeting.", required = false)
     private String alias;
 
     @Column(name = "MESSAGE", nullable = false)
