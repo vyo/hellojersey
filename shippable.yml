@@ -1,22 +1,14 @@
 language: java
 
-branches:
-  only:
-    - master
-    - develop
-
 jdk:
-   - openjdk8
    - oraclejdk8
-
-matrix:
-  allow_failures:
-    - openjdk8
 
 script:
    - mvn test
 
 notifications:
-  email:
-      recipients:
-         - weidmann.manuel@gmail.com
+     email:
+         recipients:
+             - weidmann.manuel@gmail.com
+         on_success: change
+         on_failure: always
