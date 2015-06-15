@@ -35,3 +35,6 @@ You can then easily inspect and operate the application's REST methods via the S
 
 ###Presentation Slides
 http://slides.com/manuelweidmann/jerseytesting
+
+###Sample app
+http://hellojersey.herokuapp.com
