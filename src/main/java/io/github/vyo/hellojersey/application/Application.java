@@ -23,7 +23,7 @@ public class Application extends ResourceConfig {
 
         SwaggerConfig beanConfig = new SwaggerConfig();
         ConfigFactory.setConfig(beanConfig);
-        beanConfig.setApiVersion("1.0.0");
+        beanConfig.setApiVersion("3.0.3");
         beanConfig.setBasePath("/app");
         ScannerFactory.setScanner(new DefaultJaxrsScanner());
         ClassReaders.setReader(new DefaultJaxrsApiReader());

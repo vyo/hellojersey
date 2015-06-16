@@ -6,7 +6,7 @@
 
     <groupId>io.github.vyo</groupId>
     <artifactId>hellojersey</artifactId>
-    <version>3.0.2</version>
+    <version>3.0.3</version>
     <packaging>jar</packaging>
 
     <build>
