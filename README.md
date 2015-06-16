@@ -37,4 +37,4 @@ You can then easily inspect and operate the application's REST methods via the S
 http://slides.com/manuelweidmann/jerseytesting
 
 ###Sample app
-http://hellojersey.herokuapp.com
+https://hellojersey.herokuapp.com
