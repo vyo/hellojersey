@@ -25,7 +25,7 @@ You will need
 - a modern web browser for using the web API
 
 ###Usage
-Either 'mvn package' the project and deploy it in an applicable container, e.g. Tomcat 7 and up, Jetty or Glassfish;
+Either 'mvn package' the project and run it via 'java -jar target/hellojersey.jar';
 or run the project's main class (io.github.vyo.hellojersey.application.Launcher) in your IDE of choice.
 In the latter case an embedded Tomcat 8 will be started and the application deployed therein.
 
