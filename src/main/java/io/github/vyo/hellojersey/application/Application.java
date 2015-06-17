@@ -1,11 +1,8 @@
 package io.github.vyo.hellojersey.application;
 
-import com.wordnik.swagger.config.ConfigFactory;
-import com.wordnik.swagger.config.ScannerFactory;
-import com.wordnik.swagger.config.SwaggerConfig;
-import com.wordnik.swagger.jaxrs.config.DefaultJaxrsScanner;
-import com.wordnik.swagger.jaxrs.reader.DefaultJaxrsApiReader;
-import com.wordnik.swagger.reader.ClassReaders;
+import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.jaxrs.listing.SwaggerSerializers;
+import io.swagger.jersey.listing.ApiListingResourceJSON;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
@@ -14,18 +11,18 @@ import javax.ws.rs.ApplicationPath;
 /**
  * Created by Manuel Weidmann on 01.03.2015.
  */
-@ApplicationPath("app")
+@ApplicationPath("api")
 public class Application extends ResourceConfig {
 
     public Application() {
         packages(true, "io.github.vyo.hellojersey");
-        packages(true, "com.wordnik.swagger.jersey.listing");
 
-        SwaggerConfig beanConfig = new SwaggerConfig();
-        ConfigFactory.setConfig(beanConfig);
-        beanConfig.setApiVersion("3.0.3");
-        beanConfig.setBasePath("/app");
-        ScannerFactory.setScanner(new DefaultJaxrsScanner());
-        ClassReaders.setReader(new DefaultJaxrsApiReader());
+        BeanConfig beanConfig = new BeanConfig();
+        beanConfig.setVersion("3.1.0");
+        beanConfig.setBasePath("/api");
+        beanConfig.setResourcePackage("io.github.vyo.hellojersey");
+        beanConfig.setScan(true);
+        register(new ApiListingResourceJSON());
+        register(new SwaggerSerializers());
     }
 }

@@ -1,5 +1,9 @@
 package io.github.vyo.hellojersey.application;
 
+import io.swagger.models.Contact;
+import io.swagger.models.Info;
+import io.swagger.models.License;
+import io.swagger.models.Swagger;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.core.StandardContext;
@@ -8,6 +12,7 @@ import org.apache.catalina.webresources.DirResourceSet;
 import org.apache.catalina.webresources.StandardRoot;
 import org.h2.tools.DeleteDbFiles;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import java.io.File;
 import java.net.MalformedURLException;
@@ -69,6 +74,19 @@ public class Launcher {
 
         StandardContext ctx = (StandardContext) tomcat.addWebapp("/",
                 new File(webappDirLocation).getAbsolutePath());
+
+
+        Info info = new Info()
+                .title("Swagger Sample App")
+                .description("Desc")
+                .termsOfService("http://helloreverb.com/terms/")
+                .contact(new Contact()
+                        .email("apiteam@swagger.io"))
+                .license(new License()
+                        .name("Apache 2.0")
+                        .url("http://www.apache.org/licenses/LICENSE-2.0.html"));
+        Swagger swagger = new Swagger().info(info);
+        ctx.getServletContext().setAttribute("swagger", swagger);
 
         //declare an alternate location for your "WEB-INF/classes" dir:
         File additionWebInfClasses = new File("target/classes");
