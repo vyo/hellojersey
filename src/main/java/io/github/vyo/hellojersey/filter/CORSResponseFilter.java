@@ -22,8 +22,8 @@ public class CORSResponseFilter
 
         MultivaluedMap<String, Object> headers = responseContext.getHeaders();
 
-        headers.add("Access-Control-Allow-Origin", "localhost");
-        headers.add("Access-Control-Allow-Methods", "GET, POST, DELETE, QUERY, UPDATE");
+        headers.add("Access-Control-Allow-Origin", "*");
+        headers.add("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE, QUERY, UPDATE");
         headers.add("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With");
     }
 
