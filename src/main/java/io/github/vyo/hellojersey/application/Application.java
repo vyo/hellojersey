@@ -19,7 +19,7 @@ public class Application extends ResourceConfig {
 
         BeanConfig beanConfig = new BeanConfig();
         beanConfig.setTitle("Hello Jersey");
-        beanConfig.setVersion("3.1.0");
+        beanConfig.setVersion("3.2.0");
         beanConfig.setHost("hellojersey.herokuapp.com");
         beanConfig.setBasePath("/api");
         beanConfig.setResourcePackage("io.github.vyo.hellojersey");
