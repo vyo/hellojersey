@@ -5,6 +5,7 @@ import io.github.vyo.hellojersey.entity.Greeting;
 import io.github.vyo.hellojersey.repository.GreetingRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -42,7 +43,7 @@ public class HelloJersey {
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Returns a simple greeting", notes = "Requires no parameter.", response =
             Greeting.class)
-    @ApiResponses({@ApiResponse(code = 200, message = "Jersey is alive and well!")})
+    @ApiResponses({@ApiResponse(code = 200, message = "Jersey is alive and well!", response = Greeting.class)})
     public Greeting getGreeting() {
         return greetingRepository.defaultGreeting();
     }
@@ -52,8 +53,8 @@ public class HelloJersey {
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Greets you with an echo of your message", notes = "Requires an alias to be " +
             "specified as path parameter, outputs a Greeting object in JSON representation.", response = Greeting.class)
-    @ApiResponses({@ApiResponse(code = 200, message = "Enjoy your echo!")})
-    public Greeting getEcho(@PathParam("echo") String echo) {
+    @ApiResponses({@ApiResponse(code = 200, message = "Enjoy your echo!", response = String.class)})
+    public Greeting getEcho(@ApiParam(value = "Your greeting message", defaultValue = "hello") @PathParam("echo") String echo) {
         return new Greeting(new StringBuilder(echo).reverse().toString());
     }
 
@@ -62,9 +63,9 @@ public class HelloJersey {
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Returns a simple greeting stored on the server", notes = "Requires an alias to be " +
             "specified as path parameter.", response = Greeting.class)
-    @ApiResponses({@ApiResponse(code = 200, message = "Stored Greeting retrieved."), @ApiResponse(code = 404, message
+    @ApiResponses({@ApiResponse(code = 200, message = "Stored Greeting retrieved.", response = Greeting.class), @ApiResponse(code = 404, message
             = "No Greeting found for requested alias.")})
-    public Greeting retrieveGreeting(@PathParam("alias") String alias) {
+    public Greeting retrieveGreeting(@ApiParam(value = "The alias of the requested greeting", defaultValue = "hello") @PathParam("alias") String alias) {
         return greetingRepository.findGreeting(alias);
     }
 
@@ -74,7 +75,8 @@ public class HelloJersey {
     @ApiOperation(value = "Stores a simple greeting on the server", notes = "Requires an alias to be specified as " +
             "path parameter, and a Greeting object to be posted")
     @ApiResponses({@ApiResponse(code = 204, message = "Message stored")})
-    public void storeGreeting(@PathParam("alias") String alias, Greeting greeting) {
+    public void storeGreeting(@ApiParam(value = "The alias under which to store the greeting", defaultValue = "hello") @PathParam("alias") String alias,
+         @ApiParam(value = "The actual greeting to store", required = true, defaultValue = "{alias: \"hello\" , message:\"hello there!\"}") Greeting greeting) {
         greetingRepository.storeGreeting(alias, greeting);
     }
 
